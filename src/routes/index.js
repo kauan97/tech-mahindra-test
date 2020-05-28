@@ -1,8 +1,8 @@
 
-// const { celebrate, Joi, Segments, errors } = require('celebrate')
-const { errors } = require('celebrate')
+const { celebrate, Joi, Segments, errors } = require('celebrate')
+// const { errors } = require('celebrate')
 
-// const UserController = require('../app/controllers/UserController')
+const AuthController = require('../app/controllers/AuthController')
 const tokenValidatorMiddleware = require('../app/middlewares/tokenValidatorMiddleware')
 
 module.exports = app => {
@@ -10,7 +10,17 @@ module.exports = app => {
 		res.status(200).send({ message: 'Welcome to Tech Mahindra API!' })
 	})
 
-	app.use(tokenValidatorMiddleware)
+	app.post('/api/auth/register', celebrate({
+			[Segments.BODY]: Joi.object().keys({
+				nome: Joi.string().required(),
+				email: Joi.string().required(),
+				senha: Joi.string().required()
+			}).unknown(),
+		}),
+		async (req, res) => (new AuthController(req, res)).register()
+	)
+
+	// app.use(tokenValidatorMiddleware)
 
 	// Pretty validation errors
 	app.use(errors())

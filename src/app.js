@@ -9,6 +9,7 @@ const logger = require('morgan')
 const cors = require('cors')
 const RateLimit = require('express-rate-limit')
 
+const responseMiddleware = require('./app/middlewares/responseMiddleware')
 const database = require('./database')
 
 const app = express()
@@ -45,8 +46,10 @@ class App {
 		}))
 
 		// express middlewares
-		app.use(express.json())
-		app.use(express.urlencoded({ extended: false }))
+		this.express.use(express.json())
+		this.express.use(express.urlencoded({ extended: false }))
+
+		this.express.use(responseMiddleware)
 		this.express.use(logger('dev'))
 	}
 
