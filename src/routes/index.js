@@ -13,15 +13,35 @@ module.exports = app => {
 	app.post('/api/auth/register', celebrate({
 			[Segments.BODY]: Joi.object().keys({
 				nome: Joi.string().required(),
-				email: Joi.string().required(),
+				email: Joi.string().email().required(),
 				senha: Joi.string().required()
 			}).unknown(),
 		}),
 		async (req, res) => (new AuthController(req, res)).register()
 	)
 
+	app.post('/api/auth/login', celebrate({
+			[Segments.BODY]: Joi.object().keys({
+				email: Joi.string().email().required(),
+				senha: Joi.string().required()
+			}),
+		}),
+		async (req, res) => (new AuthController(req, res)).login()
+	)
+
 	// app.use(tokenValidatorMiddleware)
 
 	// Pretty validation errors
 	app.use(errors())
+
+	// Handling not found routes
+	app.use((req, res, next) => {
+		const errorMessage = 'Oops! Página não encontrada.'
+
+		if (req.accepts('json')) {
+			res.status(404).send({ mensagem: errorMessage })
+			return
+		}
+		res.status(404).type('txt').send(errorMessage)
+	})
 }

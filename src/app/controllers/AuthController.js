@@ -1,5 +1,6 @@
-const UserModel = require('../models/UserModel')
+const bcrypt = require('bcryptjs')
 
+const UserModel = require('../models/UserModel')
 const { generateToken } = require('../services/user')
 
 class AuthController {
@@ -37,6 +38,30 @@ class AuthController {
             return this.res.error('Não foi possível cadastrar o usuário, tente novamente mais tarde.', 400)
         }
 	}
+
+	async login () {
+		const { email, senha } = this.req.body
+
+        const user = await UserModel.findOne({ email }).select('+senha')
+        if (!user)
+			return this.res.error('Usuário e/ou senha inválidos', 401)
+
+        if (!await bcrypt.compare(senha, user.senha))
+			return this.res.error('Usuário e/ou senha inválidos', 401)
+
+		user.token = generateToken({ userId: user._id })
+
+		const currentDate = new Date()
+
+		user.ultimo_login = currentDate
+		user.data_atualizacao = currentDate
+		user.senha = senha
+
+		await user.save()
+
+		user.senha = undefined
+		return this.res.success(user, 200)
+    }
 
 	getFieldsNotCreated () {
 		return ['_id', '__v', 'data_criacao', 'data_atualizacao', 'ultimo_login', 'token']

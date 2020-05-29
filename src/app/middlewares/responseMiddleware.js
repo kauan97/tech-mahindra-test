@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     }
 
     res.error = (message, status) => {
-        console.log(message)
+        // console.log(message)
         return res.status((status ? status : 500)).send({ mensagem: message })
     }
 
