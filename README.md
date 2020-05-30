@@ -8,7 +8,7 @@ The api can be seen running on: https://tech-mahindra-test.herokuapp.com/api
 ### Available routes ###
 - https://tech-mahindra-test.herokuapp.com/api/users/5ed260266486f20028580abc 
 - https://tech-mahindra-test.herokuapp.com/api/auth/register
-- https://tech-mahindra-test.herokuapp.com/api/api/auth/login
+- https://tech-mahindra-test.herokuapp.com/api/auth/login
 
 ## I. Development Requirements ##
 
