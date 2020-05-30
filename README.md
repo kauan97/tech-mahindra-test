@@ -23,8 +23,9 @@ $ yarn global add insomnia-documenter
 $ npx insomnia-documenter -c config.json 
 $ npx serve
 ```
-... and open your browser in http://localhost:5000 
-
+... and open your browser at http://localhost:5000 
+- See more at: [Insomnia-documenter](https://www.npmjs.com/package/insomnia-documenter)
+ 
 ### D. Run Tests ###
 ```bash
 $ yarn jest
