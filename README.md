@@ -8,6 +8,7 @@ This project made in Node.js and Express.js aims to provide a restful api for au
 
 ### A. Versions ###
  - Node.js [12.13.0](https://nodejs.org/en/download/)
+ - MongoDB [4.2.1](https://docs.mongodb.com/manual/administration/install-community/)
 
 ### B. Run server ###
 ```bash
