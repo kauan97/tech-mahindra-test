@@ -10,18 +10,27 @@ This project made in Node.js and Express.js aims to provide a restful api for au
  - Node.js [12.13.0](https://nodejs.org/en/download/)
  - MongoDB [4.2.1](https://docs.mongodb.com/manual/administration/install-community/)
 
-### B. Run server ###
+### B. Run Application ###
 ```bash
 $ yarn
 $ yarn dev
 ```
 
-### C. Run Tests ###
+### C. Run Documentation ###
+```bash
+$ cd documentation
+$ yarn global add insomnia-documenter
+$ npx insomnia-documenter -c config.json 
+$ npx serve
+```
+... and open your browser in http://localhost:5000 
+
+### D. Run Tests ###
 ```bash
 $ yarn jest
 ```
 
-### D. Run ESlint ###
+### E. Run ESlint ###
 ```bash
 $ npx eslint .
 ```
