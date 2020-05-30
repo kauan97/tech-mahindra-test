@@ -35,6 +35,7 @@ class AuthController {
 
 			return this.res.success(user, 201)
 		} catch (err) {
+			console.log(err)
 			return this.res.error('Não foi possível cadastrar o usuário. Tente novamente mais tarde.', 500)
 		}
 	}
@@ -65,6 +66,7 @@ class AuthController {
 			user.senha = undefined
 			return this.res.success(user, 200)
 		} catch (err) {
+			console.log(err)
 			return this.res.error('Não foi possível autenticar o usuário. Tente novamente mais tarde', 500)
 		}
 	}
