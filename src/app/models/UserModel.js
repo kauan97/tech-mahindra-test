@@ -2,24 +2,20 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
 const UserSchema = new mongoose.Schema({
-    nome: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
+	nome: {
+		type: String,
+		required: true
+	},
+	email: {
+		type: String,
+		required: true,
 		unique: true,
-		lowercase: true,
-		// validate: {
-		// 	validator: () => Promise.resolve(false),
-		// 	message: 'E-mail já existente.'
-		// }
+		lowercase: true
 	},
 	senha: {
-        type: String,
-        required: true,
-        select: false,
+		type: String,
+		required: true,
+		select: false
 	},
 	telefones: [{
 		numero: {
@@ -32,14 +28,14 @@ const UserSchema = new mongoose.Schema({
 		}
 	}],
 	data_criacao: {
-        type: Date,
-        default: Date.now,
-    },
-    data_atualizacao: {
 		type: Date,
-		default: Date.now,
-    },
-    ultimo_login: {
+		default: Date.now
+	},
+	data_atualizacao: {
+		type: Date,
+		default: Date.now
+	},
+	ultimo_login: {
 		type: Date,
 		default: Date.now
 	},
@@ -49,10 +45,10 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.pre('save', async function (next) {
-    if (this.senha) {
-        this.senha = await bcrypt.hash(this.senha, 10)
-    }
-    next()
+	if (this.senha) {
+		this.senha = await bcrypt.hash(this.senha, 10)
+	}
+	next()
 })
 
 module.exports = mongoose.model('User', UserSchema)

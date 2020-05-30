@@ -3,12 +3,10 @@ require('dotenv').config({
 })
 
 const mongoose = require('mongoose')
-// mongoose.Promise = global.Promise
-// mongoose.set('useFindAndModify', false)
 
 module.exports = {
-	async connect () {
-		await mongoose.connect(process.env.MONGO_URL, {
+	async connect (dbName) {
+		await mongoose.connect(`${process.env.MONGO_URL}${dbName}`, {
 			useNewUrlParser: true,
 			useCreateIndex: true,
 			useUnifiedTopology: true

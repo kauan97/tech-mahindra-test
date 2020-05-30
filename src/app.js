@@ -12,8 +12,6 @@ const RateLimit = require('express-rate-limit')
 const responseMiddleware = require('./app/middlewares/responseMiddleware')
 const database = require('./database')
 
-const app = express()
-
 class App {
 	constructor () {
 		this.express = express()
