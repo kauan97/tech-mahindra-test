@@ -126,13 +126,13 @@ module.exports = {
 	// setupFiles: [],
 
 	// A list of paths to modules that run some code to configure or set up the testing framework before each test
-	setupFilesAfterEnv: ['./jest.setup.js'],
+	// setupFilesAfterEnv: ['./jest.setup.js'],
 
 	// A list of paths to snapshot serializer modules Jest should use for snapshot testing
 	// snapshotSerializers: [],
 
 	// The test environment that will be used for testing
-	testEnvironment: "node",
+	testEnvironment: 'node',
 
 	// Options that will be passed to the testEnvironment
 	// testEnvironmentOptions: {},
@@ -142,9 +142,8 @@ module.exports = {
 
 	// The glob patterns Jest uses to detect test files
 	testMatch: [
-	  "**/__tests__/**/*.spec.js?(x)",
-	//   "**/__tests__/unit/email.test.js?(x)",
-	],
+		'**/__tests__/**/*.spec.js?(x)'
+	]
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
 	// testPathIgnorePatterns: [
@@ -185,4 +184,4 @@ module.exports = {
 
 	// Whether to use watchman for file crawling
 	// watchman: true,
-  };
+}

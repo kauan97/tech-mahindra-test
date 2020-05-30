@@ -1,22 +1,22 @@
 const request = require('supertest')
-const path = require('path')
 const faker = require('faker')
+const { resolve } = require('path')
 
-const db = require(path.resolve('src', 'database'))
-const app = require(path.resolve('src', 'app'))
-const factory = require(path.resolve('__tests__', 'factories'))
+const db = require(resolve('src', 'database'))
+const app = require(resolve('src', 'app'))
+const factory = require(resolve('__tests__', 'factories'))
 
 describe('User authentication', () => {
-    beforeAll(async () => {
-        await db.connect()
-    })
+	beforeAll(async () => {
+		await db.connect('user_authentication')
+	})
 
-    afterAll(async () => {
-        await db.destroy()
-    })
+	afterAll(async () => {
+		await db.destroy('user_authentication')
+	})
 
-    beforeEach(async () => {
-        await db.truncate()
+	beforeEach(async () => {
+		await db.truncate('user_authentication')
 	})
 
 	describe('Sign up', () => {
@@ -125,7 +125,7 @@ describe('User authentication', () => {
 			const senha = '123123'
 
 			const user = await factory.create('User', {
-			  	senha
+				senha
 			})
 
 			const response = await request(app)
@@ -136,7 +136,7 @@ describe('User authentication', () => {
 				})
 
 			expect(response.body).toHaveProperty('token')
-		  })
+		})
 
 		it('should not authenticate with nonexistent email', async () => {
 			const response = await request(app)
@@ -152,7 +152,7 @@ describe('User authentication', () => {
 
 		it('should not authenticate with invalid password', async () => {
 			const user = await factory.create('User', {
-			  	senha: '123123'
+				senha: '123123'
 			})
 
 			const response = await request(app)
@@ -174,7 +174,7 @@ describe('User authentication', () => {
 					senha: '123456'
 				})
 
- 			expect(response.status).toBe(400)
+			expect(response.status).toBe(400)
 			expect(response.body.message).toBe('"email" must be a valid email')
 		})
 	})
